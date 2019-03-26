@@ -7,26 +7,43 @@ let cardsDelt = [];
 let hand = [];
 let value = [];
 let suit = [];
+let cardsToHold = [false, false, false, false, false];
 
 let dealBtn = document.querySelector('input.deal');
 let image = document.querySelectorAll('img.card');
+let drawBtn = document.querySelector('input.draw');
 
 dealBtn.addEventListener('click', dealCards);
+drawBtn.addEventListener('click', drawCards);
+
+image.forEach(function(e){
+    e.addEventListener('click', holdCard);
+})
 
 function dealCards() {
     cardsDelt = [];
     value = [];
     suit = [];
+    cardsToHold = [false, false, false, false, false];
 
-    for(let i = 0; i < 5; i++){
+    while(cardsDelt.length < 5){
         let newCard = Math.floor(Math.random()*52);
-        if(cardsDelt.includes(newCard)){
-            i--;
-        } else {
-            cardsDelt.push(newCard);
+        if(!cardsDelt.includes(newCard)){
             let imageSrc = imageLink + cardImages[newCard];
-            image[i].src=imageSrc;
+            image[cardsDelt.length].src=imageSrc;
+            cardsDelt.push(newCard);
         }
     }
-    console.log(cardsDelt);
+    dealBtn.setAttribute('disabled', true);
+    drawBtn.removeAttribute('disabled');
+}
+
+function drawCards() {
+    
+    dealBtn.removeAttribute('disabled');
+    drawBtn.setAttribute('disabled', true);
+}
+
+function holdCard(e) {
+    console.log(e);
 }
