@@ -2,3 +2,8 @@ img {
     height: 200px;
     max-width: 200px;
 }
+
+.hold {
+    border-style: solid;
+    border-color: red;
+  }
