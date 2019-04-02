@@ -5,6 +5,7 @@ let cardImages = ['AS.jpg', '2S.jpg', '3S.jpg', '4S.jpg', '5S.jpg', '6S.jpg', '7
                   'AH.jpg', '2H.jpg', '3H.jpg', '4H.jpg', '5H.jpg', '6H.jpg', '7H.jpg', '8H.jpg', '9H.jpg', '10H.jpg', 'JH.jpg', 'QH.jpg', 'KH.jpg'];
 let cardsDelt = [];
 let cardsToHold = [];
+let cardsToFoldIndex = [];
 let hand = [];
 
 let image = document.querySelectorAll('img.card');
@@ -44,22 +45,29 @@ function dealCards() {
             cardsDelt.push(newCard);
         }
     }
-    hand = cardsDelt;
+    for(let i = 0; i < 5; i++){
+        hand[i] = cardsDelt[i];
+    }
     displayCards();
 }
 
 function drawCards() {
+    cardsToHoldIndex = [];
     for(let i = 0; i < 5; i++){
-        if(cardsToHold.includes(image[i])) {
-            console.log(i);
+        if(!cardsToHold.includes(image[i])) {
+            cardsToFoldIndex.push(i);
         }
     }
-    /*while(cardsDelt.length < 5) {
+    let i = 0;
+    while(cardsDelt.length < 5 + cardsToFoldIndex.length) {
         let newCard = Math.floor(Math.random()*52);
         if(!cardsDelt.includes(newCard)){
-
+            cardsDelt.push(newCard);
+            hand[cardsToFoldIndex[i]] = newCard;
+            i++;
         }
-    }*/
+    }
+    displayCards();
 }
 
 function displayCards() {
@@ -72,6 +80,11 @@ function displayCards() {
 }
 
 function scoreHand() {
+    hand.forEach(function(e){
+        console.log(e);
+        console.log(e%13);
+        console.log(Math.floor(e/13));
+    });
 }
 
 function holdCard(e) {
