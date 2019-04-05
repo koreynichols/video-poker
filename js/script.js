@@ -10,6 +10,7 @@ let hand = [];
 let suit = [];
 let value = [];
 let valueCount = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+let scoreOfHand = 0;
 
 let image = document.querySelectorAll('img.card');
 
@@ -28,6 +29,7 @@ function deal() {
     cardsToHold = [];
     cardsToFoldIndex = [];
     valueCount = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+    scoreOfHand = 0;
     image.forEach(function(e){
         e.classList.remove('hold');
     });
@@ -93,12 +95,11 @@ function scoreHand() {
     });
     if(suit.every(isFlush)) {
         console.log("flush");
-    } else {
-        console.log("not a flush");
     }
-    console.log(value.sort(function(a, b){return a-b}));
+    value.sort(function(a, b){return a-b});
+    isStraight();
     getValueCount();
-    console.log(valueCount);
+    countValueCount();
 }
 
 function holdCard(e) {
@@ -118,7 +119,15 @@ function removeHold(arr, value) {
 }
 
 function isStraight() {
-    
+    let countForStraight = 0;
+    for(let i = 0; i < value.length -1; i++) {
+        if(value[i] == value[i+1]-1){
+            countForStraight++;
+        }
+    }
+    if(countForStraight == 4 || value[0] == 0 && value[1] == 9 && value[2] == 10 && value[3] == 11 && value[4] == 12){
+        console.log('straight');
+    }
 }
 
 function isFlush(value) {
@@ -132,5 +141,22 @@ function getValueCount() {
 }
 
 function countValueCount() {
-
+    if(valueCount.indexOf(4) != -1) {
+        console.log("4 of a kind");
+    }
+    if(valueCount.indexOf(3) != -1) {
+        if(valueCount.indexOf(2) != -1){
+            console.log("full house");
+        }
+        else {
+            console.log("3 of a kind");
+        }
+    }
+    if(valueCount.indexOf(2) != -1){
+        if(valueCount.lastIndexOf(2) != valueCount.indexOf(2)){
+            console.log("2 pair");
+        } else if(valueCount.indexOf(2) == 0 || valueCount.indexOf(2) >= 10) {
+            console.log("pair jacks or better");
+        }
+    }
 }
