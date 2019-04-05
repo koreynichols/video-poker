@@ -7,6 +7,9 @@ let cardsDelt = [];
 let cardsToHold = [];
 let cardsToFoldIndex = [];
 let hand = [];
+let suit = [];
+let value = [];
+let valueCount = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 
 let image = document.querySelectorAll('img.card');
 
@@ -23,6 +26,8 @@ image.forEach(function(e){
 function deal() {
     cardsDelt = [];
     cardsToHold = [];
+    cardsToFoldIndex = [];
+    valueCount = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
     image.forEach(function(e){
         e.classList.remove('hold');
     });
@@ -80,11 +85,20 @@ function displayCards() {
 }
 
 function scoreHand() {
+    suit = [];
+    value = [];
     hand.forEach(function(e){
-        console.log(e);
-        console.log(e%13);
-        console.log(Math.floor(e/13));
+        value.push(e%13);
+        suit.push(Math.floor(e/13));
     });
+    if(suit.every(isFlush)) {
+        console.log("flush");
+    } else {
+        console.log("not a flush");
+    }
+    console.log(value.sort(function(a, b){return a-b}));
+    getValueCount();
+    console.log(valueCount);
 }
 
 function holdCard(e) {
@@ -98,7 +112,25 @@ function holdCard(e) {
 }
 
 function removeHold(arr, value) {
-    return arr.filter(function(ele){
-        return ele != value;
+    return arr.filter(function(e){
+        return e != value;
     });
- }
+}
+
+function isStraight() {
+    
+}
+
+function isFlush(value) {
+    return value === suit[0];
+}
+
+function getValueCount() {
+    value.forEach(function(e) {
+        valueCount[e]++;
+    })
+}
+
+function countValueCount() {
+
+}
