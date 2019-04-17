@@ -185,6 +185,7 @@ function countValueCount() {
         if(valueCount.indexOf(2) != -1){
             console.log("full house");
             scoreOfHand = 6;
+            return;
         }
         else {
             console.log("3 of a kind");
@@ -221,7 +222,7 @@ function payWinnings() {
             credit += winnings;
             break;
         case 5:
-            winnings = bet * 5;
+            winnings = bet * 6;
             credit += winnings;
             break;
         case 6:
@@ -237,7 +238,7 @@ function payWinnings() {
             credit += winnings;
             break;
         case 9:
-            winnings = bet * 400;
+            winnings = bet * 250;
             credit += winnings;
             break;
         default:
