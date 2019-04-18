@@ -17,6 +17,8 @@ let winnings = 0;
 
 let image = document.querySelectorAll('img.card');
 
+let payoutTable = document.querySelector('.payouts table tbody');
+
 let dealBtn = document.querySelector('input.deal');
 let drawBtn = document.querySelector('input.draw');
 let upBetBtn = document.querySelector('input.upBet');
@@ -27,7 +29,14 @@ let lblCredit = document.querySelector('label.credit');
 dealBtn.addEventListener('click', deal);
 drawBtn.addEventListener('click', draw);
 
+for(i = 0; i < payoutTable.children.length; i++) {
+    payoutTable.children[i].children[bet].classList.add('currentBet');
+};
+
 upBetBtn.addEventListener('click', function() {
+    if(scoreOfHand != 0){
+        removeHighlight();
+    }
     bet++;
     if(bet == 5) {
         upBetBtn.setAttribute('disabled', true);
@@ -36,9 +45,13 @@ upBetBtn.addEventListener('click', function() {
         downBetBtn.removeAttribute('disabled');
     }
     lblBet.innerText = bet;
+    shiftTableUp();
 });
 
 downBetBtn.addEventListener('click', function() {
+    if(scoreOfHand != 0){
+        removeHighlight();
+    }
     bet--;
     if(bet == 1){
         downBetBtn.setAttribute('disabled', true);
@@ -47,13 +60,40 @@ downBetBtn.addEventListener('click', function() {
         upBetBtn.removeAttribute('disabled');
     }
     lblBet.innerText = bet;
+    shiftTableDown();
 })
+
+function shiftTableUp() {
+    for(i = 0; i < payoutTable.children.length; i++) {
+        payoutTable.children[i].children[bet].classList.add('currentBet');
+        payoutTable.children[i].children[bet-1].classList.remove('currentBet');
+    };
+}
+
+function shiftTableDown() {
+    for(i = 0; i < payoutTable.children.length; i++) {
+        payoutTable.children[i].children[bet].classList.add('currentBet');
+        payoutTable.children[i].children[bet+1].classList.remove('currentBet');
+    };
+}
+
+function highlightWinningsOnTable() {
+    console.log(payoutTable.children[10-scoreOfHand].children[bet]);
+    payoutTable.children[10-scoreOfHand].children[bet].classList.add('winningValue');
+}
+
+function removeHighlight() {
+    payoutTable.children[10-scoreOfHand].children[bet].classList.remove('winningValue');
+}
 
 image.forEach(function(e){
     e.addEventListener('click', holdCard);
 })
 
 function deal() {
+    if(scoreOfHand != 0){
+        removeHighlight();
+    }
     cardsDelt = [];
     cardsToHold = [];
     cardsToFoldIndex = [];
@@ -128,13 +168,15 @@ function scoreHand() {
         suit.push(Math.floor(e/13));
     });
     if(suit.every(isFlush)) {
-        console.log("flush");
         scoreOfHand = 5;
     }
     value.sort(function(a, b){return a-b});
     isStraight();
     getValueCount();
     countValueCount();
+    if(scoreOfHand != 0){
+        highlightWinningsOnTable();
+    }
 }
 
 function holdCard(e) {
@@ -161,8 +203,15 @@ function isStraight() {
         }
     }
     if(countForStraight == 4 || value[0] == 0 && value[1] == 9 && value[2] == 10 && value[3] == 11 && value[4] == 12){
-        console.log('straight');
-        scoreOfHand = 4;
+        if(scoreOfHand == 5) {
+            if (value[0] == 0 && value[1] == 9 && value[2] == 10 && value[3] == 11 && value[4] == 12){
+                scoreOfHand = 9;
+            } else {
+                scoreOfHand = 8;
+            }
+        } else {
+            scoreOfHand = 4;
+        }
     }
 }
 
@@ -178,27 +227,22 @@ function getValueCount() {
 
 function countValueCount() {
     if(valueCount.indexOf(4) != -1) {
-        console.log("4 of a kind");
         scoreOfHand = 7;
     }
     if(valueCount.indexOf(3) != -1) {
         if(valueCount.indexOf(2) != -1){
-            console.log("full house");
             scoreOfHand = 6;
             return;
         }
         else {
-            console.log("3 of a kind");
             scoreOfHand = 3;
         }
     }
     if(valueCount.indexOf(2) != -1){
         if(valueCount.lastIndexOf(2) != valueCount.indexOf(2)){
-            console.log("2 pair");
             scoreOfHand = 2;
         } else if(valueCount.indexOf(2) == 0 || valueCount.indexOf(2) >= 10) {
             scoreOfHand = 1;
-            console.log("pair jacks or better");
         }
     }
 }
@@ -208,38 +252,51 @@ function payWinnings() {
         case 1:
             winnings = bet;
             credit += winnings;
+            console.log("pair jacks or better");
             break;
         case 2:
             winnings = bet * 2;
             credit += winnings;
+            console.log("2 pair");
             break;
         case 3:
             winnings = bet * 3;
             credit += winnings;
+            console.log("3 of a kind");
             break;
         case 4:
             winnings = bet * 4;
             credit += winnings;
+            console.log("straight");
             break;
         case 5:
             winnings = bet * 6;
             credit += winnings;
+            console.log("flush");
             break;
         case 6:
             winnings = bet * 8;
             credit += winnings;
+            console.log("full house");
             break;
         case 7:
             winnings = bet * 25;
             credit += winnings;
+            console.log("4 of a kind");
             break;
         case 8:
             winnings = bet * 50;
             credit += winnings;
+            console.log("straight flush");
             break;
         case 9:
-            winnings = bet * 250;
+            if (bet == 5) {
+                winnings = 4000;
+            } else {
+                winnings = bet * 250;
+            }
             credit += winnings;
+            console.log("royal flush");
             break;
         default:
             winnings = 0

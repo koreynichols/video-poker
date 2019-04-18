@@ -7,3 +7,11 @@ img {
     border-style: solid;
     border-color: red;
   }
+
+.currentBet {
+  background-color: yellow;
+}
+
+.winningValue {
+  background-color: green;
+}
