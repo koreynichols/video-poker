@@ -94,6 +94,8 @@ function deal() {
     if(scoreOfHand != 0){
         removeHighlight();
     }
+    upBetBtn.setAttribute('disabled', true);
+    downBetBtn.setAttribute('disabled', true);
     cardsDelt = [];
     cardsToHold = [];
     cardsToFoldIndex = [];
@@ -117,6 +119,14 @@ function draw() {
     scoreHand();
     payWinnings();
     lblCredit.innerText = "Credit: " + credit;
+    if(bet == 5) {
+        downBetBtn.removeAttribute('disabled');
+    } else if (bet == 1){
+        upBetBtn.removeAttribute('disabled');
+    } else {
+        downBetBtn.removeAttribute('disabled');
+        upBetBtn.removeAttribute('disabled');
+    }
 }
 
 function dealCards() {

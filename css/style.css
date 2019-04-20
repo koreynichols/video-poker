@@ -1,3 +1,31 @@
+body {
+  padding: 0;
+  margin: 0;
+  background-color: #f8f8f8;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.container {
+  display: flex;
+  flex-direction: column
+}
+.payouts {
+  margin: 10px auto 0px;
+}
+
+.hand {
+  margin: 10px auto 0px;
+}
+
+table {
+  border-collapse: collapse;
+}
+
+table, th, td {
+  border: 1px solid black;
+  padding: 10px 25px 10px;
+}
+
 img {
     height: 200px;
     max-width: 200px;
