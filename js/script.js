@@ -1,3 +1,4 @@
+const delay = 500;
 let imageLink = '/images/cardImages/';
 let cardImages = ['AS.jpg', '2S.jpg', '3S.jpg', '4S.jpg', '5S.jpg', '6S.jpg', '7S.jpg', '8S.jpg', '9S.jpg', '10S.jpg', 'JS.jpg', 'QS.jpg', 'KS.jpg',
                   'AC.jpg', '2C.jpg', '3C.jpg', '4C.jpg', '5C.jpg', '6C.jpg', '7C.jpg', '8C.jpg', '9C.jpg', '10C.jpg', 'JC.jpg', 'QC.jpg', 'KC.jpg',
@@ -14,6 +15,7 @@ let scoreOfHand = 0;
 let credit = 100;
 let bet = 1;
 let winnings = 0;
+
 
 let image = document.querySelectorAll('img.card');
 
@@ -170,7 +172,7 @@ function displayCards(i) {
     image[i].src = imageSrc;
     i++;
     if(i < 5){
-        setTimeout(displayCards(i), 10000)
+        setTimeout(function() {displayCards(i)}, delay)
     }
     // hand.forEach(function(e){
     //     let imageSrc = imageLink + cardImages[e];
