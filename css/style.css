@@ -23,7 +23,8 @@ table {
 
 table, th, td {
   border: 1px solid black;
-  padding: 10px 25px 10px;
+  padding: 5px 25px 5px;
+  text-align: center;
 }
 
 img {
@@ -42,4 +43,25 @@ img {
 
 .winningValue {
   background-color: green;
+}
+
+.bet-panel {
+  display: flex;
+  margin: 10px auto 100px;
+  width: 80%;
+  justify-content: space-around;
+  max-width: 600px;
+}
+
+.bet-panel input {
+ height: 45px;
+ width: 70px;
+}
+
+.bet-panel label {
+  margin: auto 0;
+}
+
+.bold {
+  font-weight: bold;
 }

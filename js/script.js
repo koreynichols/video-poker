@@ -139,7 +139,7 @@ function dealCards() {
     for(let i = 0; i < 5; i++){
         hand[i] = cardsDelt[i];
     }
-    displayCards();
+    displayCards(0);
 }
 
 function drawCards() {
@@ -158,16 +158,25 @@ function drawCards() {
             i++;
         }
     }
-    displayCards();
+    displayCards(0);
 }
 
-function displayCards() {
-    let i = 0;
-    hand.forEach(function(e){
-        let imageSrc = imageLink + cardImages[e];
-        image[i].src = imageSrc;
-        i++;
-    })
+function displayCards(i) {
+    console.log(hand)
+    console.log(i)
+    console.log(hand[i])
+    console.log(image)
+    let imageSrc = imageLink + cardImages[hand[i]];
+    image[i].src = imageSrc;
+    i++;
+    if(i < 5){
+        setTimeout(displayCards(i), 10000)
+    }
+    // hand.forEach(function(e){
+    //     let imageSrc = imageLink + cardImages[e];
+    //     image[i].src = imageSrc;
+    //     i++;
+    // })
 }
 
 function scoreHand() {
