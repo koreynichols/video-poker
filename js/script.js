@@ -168,17 +168,11 @@ function displayCards(i) {
     console.log(i)
     console.log(hand[i])
     console.log(image)
-    let imageSrc = imageLink + cardImages[hand[i]];
-    image[i].src = imageSrc;
-    i++;
-    if(i < 5){
-        setTimeout(function() {displayCards(i)}, delay)
-    }
-    // hand.forEach(function(e){
-    //     let imageSrc = imageLink + cardImages[e];
-    //     image[i].src = imageSrc;
-    //     i++;
-    // })
+    hand.forEach(function(e){
+        let imageSrc = imageLink + cardImages[e];
+        image[i].src = imageSrc;
+        i++;
+    })
 }
 
 function scoreHand() {
