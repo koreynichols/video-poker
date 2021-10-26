@@ -7,14 +7,14 @@ body {
 
 .container {
   display: flex;
-  flex-direction: column
+  flex-direction: column;
 }
 .payouts {
-  margin: 10px auto 0px;
+  margin: 100px auto 50px;
 }
 
 .hand {
-  margin: 10px auto 0px;
+  margin: 10px auto 50px;
 }
 
 table {
@@ -30,11 +30,11 @@ table, th, td {
 img {
     height: 200px;
     max-width: 200px;
+    margin: 0 20px;
 }
 
 .hold {
-    border-style: solid;
-    border-color: red;
+    outline: 3px solid red;
   }
 
 .currentBet {
@@ -64,4 +64,9 @@ img {
 
 .bold {
   font-weight: bold;
+}
+
+.card:hover {
+  outline: 3px solid green;
+  cursor: pointer;
 }
