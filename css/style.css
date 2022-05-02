@@ -10,11 +10,12 @@ body {
   flex-direction: column;
 }
 .payouts {
-  margin: 100px auto 50px;
+  margin: 30px auto 15px;
+  line-height: .6rem;
 }
 
 .hand {
-  margin: 10px auto 50px;
+  margin: 10px auto 15px;
 }
 
 table {
@@ -47,7 +48,7 @@ img {
 
 .bet-panel {
   display: flex;
-  margin: 10px auto 100px;
+  margin: 10px auto 0;
   width: 80%;
   justify-content: space-around;
   max-width: 600px;
@@ -60,13 +61,30 @@ img {
 
 .bet-panel label {
   margin: auto 0;
+  border: 1px solid black;
+  border-radius: 10px;
+  padding: .7rem;
 }
 
 .bold {
   font-weight: bold;
 }
 
+.card {
+  border-radius: 10px;
+}
+
 .card:hover {
-  outline: 3px solid green;
+  box-shadow: 0px 0px 10px black;
   cursor: pointer;
+}
+
+input[type=submit] {
+  border-radius: 1rem;
+  background-color: #f8f8f8;
+}
+
+input[type=submit]:hover {
+  cursor: pointer;
+  background-color: #ddd;
 }
