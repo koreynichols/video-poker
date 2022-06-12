@@ -1,5 +1,5 @@
 <h1 align="center">Video Poker</h1> <div align="center"><h3><a href="https://koreynichols.github.io/video-poker/">Click here to play!</a><h3></div>
-<p>One of my favorite games when I was a kid was playing a handheld video poker game. I used that as inspiration for this project. I used HTML, CSS and JavaScript for this project.</p>
+<p>One of my favorite games when I was a kid was playing a handheld video poker game. I used that as inspiration for this project. I used HTML, CSS and JavaScript to create this.</p>
 
 <p>Use the right arrow button to increase bet and left arrow to decrease. The highlighted column is what you can win with your current bet.</p>
 Click the deal button to deal your hand. Click on any cards you want to hold. Cards you select to hold will have a red border like the queens in the image below.
