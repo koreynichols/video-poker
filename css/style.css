@@ -88,3 +88,37 @@ input[type=submit]:hover {
   cursor: pointer;
   background-color: #ddd;
 }
+
+.reset {
+  height: 100vh;
+  width: 100vw;
+  position: fixed;
+  z-index: 1;
+  background-color: rgba(58, 51, 49, 0.618);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  visibility: hidden;
+}
+
+.reset-container {
+  padding: 10px;
+  height: max-content;
+  max-width: 30%;
+  border: solid 1px;
+  text-align: center;
+  background-color: white;
+}
+
+input[type=button] {
+  padding: .5rem 1rem;
+  border-radius: 50%;
+  background-color: #f8f8f8;
+  font-weight: 500;
+  font-size: 1.3rem;
+}
+
+input[type=button]:hover {
+  cursor: pointer;
+  background-color: #ddd;
+}
